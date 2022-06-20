@@ -18,12 +18,19 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 public class PetControllerTest extends RestApiBaseTest {
+
 	int petID;
+
 	int ownerID;
+
 	String petName = RandomStringUtils.randomAlphabetic(3);
+
 	String ownerFName = RandomStringUtils.randomAlphabetic(7);
+
 	String ownerLName = RandomStringUtils.randomAlphabetic(7);
+
 	String ownerAddress = RandomStringUtils.randomAlphabetic(10);
+
 	String ownersPhone = "" + RandomUtils.nextInt(600000000, 699999999);
 
 	@BeforeEach
@@ -39,8 +46,8 @@ public class PetControllerTest extends RestApiBaseTest {
 		petID = maxPetResult.getInt(1) + 1;
 
 		PreparedStatement owner = connection.prepareStatement(
-			"INSERT INTO OWNERS(id, first_name, last_name, address, city,telephone) VALUES(?,?,?,?,?,?)",
-			Statement.RETURN_GENERATED_KEYS);
+				"INSERT INTO OWNERS(id, first_name, last_name, address, city,telephone) VALUES(?,?,?,?,?,?)",
+				Statement.RETURN_GENERATED_KEYS);
 		owner.setInt(1, ownerID);
 		owner.setString(2, ownerFName);
 		owner.setString(3, ownerLName);
@@ -50,8 +57,8 @@ public class PetControllerTest extends RestApiBaseTest {
 		owner.executeUpdate();
 
 		PreparedStatement pet = connection.prepareStatement(
-			"INSERT INTO pets(id, name, owner_id, birth_date) VALUES(?,?,?, current_date)",
-			Statement.RETURN_GENERATED_KEYS);
+				"INSERT INTO pets(id, name, owner_id, birth_date) VALUES(?,?,?, current_date)",
+				Statement.RETURN_GENERATED_KEYS);
 		pet.setInt(1, petID);
 		pet.setString(2, petName);
 		pet.setInt(3, ownerID);
@@ -75,31 +82,18 @@ public class PetControllerTest extends RestApiBaseTest {
 		}
 	}
 
-
 	@Test
 	public void getOwnerPetByID() {
-		when()
-			.get("owners/" + ownerID + "/pets")
-			.then()
-			.statusCode(200)
-			.body("[0].id", is(petID),
-				"[0].name", is(petName),
-				"[0].new", is(false)
-			);
+		when().get("owners/" + ownerID + "/pets").then().statusCode(200).body("[0].id", is(petID), "[0].name",
+				is(petName), "[0].new", is(false));
 	}
 
 	@Test
 	public void postNewPetAndGetID() {
-		given()
-			.contentType("application/json")
-			.body("{\n" +
-				"  \"birthDate\": \"2022-06-20\",\n" +
-				"  \"name\": \""+ RandomStringUtils.randomAlphabetic(3) +"\"\n" +
-				"}")
-			.when()
-			.post("owners/" + ownerID + "/pets")
-			.then()
-			.statusCode(201)
-			.body("id", not(empty()));
+		given().contentType("application/json")
+				.body("{\n" + "  \"birthDate\": \"2022-06-20\",\n" + "  \"name\": \""
+						+ RandomStringUtils.randomAlphabetic(3) + "\"\n" + "}")
+				.when().post("owners/" + ownerID + "/pets").then().statusCode(201).body("id", not(empty()));
 	}
+
 }
