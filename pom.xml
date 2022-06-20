@@ -93,12 +93,13 @@
       <version>4.13.1</version>
       <scope>test</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.epages/restdocs-api-spec-restassured -->
     <dependency>
-      <groupId>io.rest-assured</groupId>
-      <artifactId>rest-assured</artifactId>
-      <version>5.1.0</version>
-      <scope>test</scope>
+      <groupId>com.epages</groupId>
+      <artifactId>restdocs-api-spec-restassured</artifactId>
+      <version>0.16.2</version>
     </dependency>
+
     <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest-all -->
     <dependency>
       <groupId>org.hamcrest</groupId>
