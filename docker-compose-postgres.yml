@@ -2,7 +2,7 @@ version: "2.2"
 
 services:
   backend:
-    image: tinkoff-edu-app:1.0.0
+    image: spring-petclinic-2.7.0
     build: .
     ports:
       - "8080:8080"
