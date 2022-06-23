@@ -1,0 +1,29 @@
+stages:
+  - build
+  - package
+  - orchestrator
+  - test
+
+maven-build:
+  image: maven:3-jdk-11
+  stage: build
+  script: "mvn clean package -DskipTests"
+  artifacts:
+    paths:
+      - target/*.jar
+
+docker-build:
+  stage: package
+  script: "docker buildx build --tag spring-app:1.0.0 ."
+
+docker-run:
+  stage: orchestrator
+  script: "docker-compose up --detach"
+
+test:
+  image: maven:3-jdk-11
+  stage: test
+  script: "mvn test"
+  artifacts:
+    paths:
+      - target/*.jar

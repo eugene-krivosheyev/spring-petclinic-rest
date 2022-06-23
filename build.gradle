@@ -39,3 +39,9 @@ dependencies {
 test {
   useJUnitPlatform()
 }
+
+configurations.all {
+    resolutionStrategy {
+        force 'org.codehaus.groovy:groovy-all:4.0.1'
+    }
+}
