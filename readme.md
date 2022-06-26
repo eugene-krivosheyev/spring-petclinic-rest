@@ -16,6 +16,12 @@ cd spring-petclinic
 java -jar target/*.jar
 ```
 
+### In order to run the application run command:
+```
+docker buildx build --tag tinkoff-edu-app:1.0.0 .
+docker-compose up --detach
+```
+
 You can then access petclinic API here: [http://localhost:8080/swagger-ui/](http://localhost:8080/swagger-ui/)
 
 <img width="1042" alt="petclinic-screenshot" src="https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png">

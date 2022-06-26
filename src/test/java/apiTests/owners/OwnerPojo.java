@@ -13,11 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.newtests;
+package apiTests.owners;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Owner {
+public class OwnerPojo {
+
+	@SerializedName("id")
+	private Integer id;
 
 	@SerializedName("address")
 	private String address;
@@ -38,7 +41,7 @@ public class Owner {
 		return address;
 	}
 
-	public Owner setAddress(String address) {
+	public OwnerPojo setAddress(String address) {
 		this.address = address;
 		return this;
 	}
@@ -47,16 +50,16 @@ public class Owner {
 		return city;
 	}
 
-	public Owner setCity(String city) {
+	public OwnerPojo setCity(String city) {
 		this.city = city;
 		return this;
 	}
 
 	public String getTelephone() {
-		return telephone;
+		return String.valueOf(telephone);
 	}
 
-	public Owner setTelephone(String telephone) {
+	public OwnerPojo setTelephone(String telephone) {
 		this.telephone = telephone;
 		return this;
 	}
@@ -65,17 +68,26 @@ public class Owner {
 		return lastName;
 	}
 
-	public String setLast_name(String last_name) {
+	public OwnerPojo setLast_name(String last_name) {
 		this.lastName = last_name;
-		return last_name;
+		return this;
 	}
 
 	public String getFirstName() {
 		return firstName;
 	}
 
-	public String setFist_name(String fist_name) {
+	public OwnerPojo setFist_name(String fist_name) {
 		this.firstName = fist_name;
-		return fist_name;
+		return this;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public OwnerPojo setId(int id) {
+		this.id = id;
+		return this;
 	}
 }
